@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passcode Check</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+ <!-- Top Section -->
+ <div class="top-section">
+    <h1>Congratulations! You have found a clue for a hidden immunity idol</h1>
+    <p>But the real challenge begins below...</p>
+  </div>
+  <div class="instruction1">
+    <h2 class="instruction1-text">Your first task...</h2>
+    <p  class="instruction1-text">BEWARE: <a  class="instruction1-text" href="https://crosswordlabs.com/view/2024-11-06-1021" target="_blank">CLICK AT YOUR OWN RISK</a></p>
+  </div>
+  <hr style="border: 1px solid black; margin: 0">
+<div class="passcode-section">
+  <h2>Are you correct? Only time will tell...</h2>
+  <p>Enter the first character of each answer in order. If you are correct you can proceed... </p>
+  <div class="container" id="passcode-container"></div>
+  <button class="button enabled" id ="openModalBtn">Click Me</button>
+</div>
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>You were CORRECT! Immunity Idol is on the way...</h2>
+        <h3 for="trackingCode">absdkjflskdjflskjs</h3>
+        <a href="https://pastebin.com/FWJ8SqV2" target="_blank">secret note</a>
+    </div>
+</div>
+  
+  <script>
+    const passcode = "pdwltfssmcmaawfrbwc";
+    const container = document.getElementById("passcode-container");
+
+    // Create input boxes
+    for (let i = 0; i < passcode.length; i++) {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.maxLength = "1";
+      input.classList.add("input-box");
+      
+      // Check character on input
+      input.addEventListener("input", () => {
+        if (input.value.toLowerCase() === passcode[i]) {
+          input.classList.add("correct");
+          input.classList.remove("incorrect");
+        } else {
+          input.classList.add("incorrect");
+          input.classList.remove("correct");
+        }
+        // Move focus to the next box
+        if (input.value && i < passcode.length - 1) {
+          container.children[i + 1].focus();
+        }
+        checkPasscode();  // Check if all inputs are correct
+
+      });
+
+      container.appendChild(input);
+    }
+
+    // Get elements
+    const modal = document.getElementById("myModal");
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    checkPasscode();
+
+    // Open modal on button click
+    openModalBtn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Close modal when clicking on the "x"
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+  // Function to check if all input values are correct
+  function checkPasscode() {
+    let allCorrect = true;
+    let totalCorrect = 0
+    for (let i = 0; i < passcode.length; i++) {
+      const input = container.children[i];
+      if (input.value.toLowerCase() !== passcode[i]) {
+        allCorrect = false;
+      } else{
+        totalCorrect += 1
+      }
+    }
+
+    if(totalCorrect >= 2 && totalCorrect < 5){
+      openModalBtn.disabled = true;
+      openModalBtn.style.backgroundColor = "#474744"
+      openModalBtn.style.cursor = "not-allowed";
+      openModalBtn.textContent = "You're not even close 🤡";
+    }  else if (totalCorrect >=5 && totalCorrect < 8){
+      openModalBtn.disabled = true;
+      openModalBtn.style.backgroundColor = "#a39f2c";
+      openModalBtn.style.cursor = "not-allowed";
+      openModalBtn.textContent = "Yawwwwn 💤";
+    }else if (totalCorrect >=8 && totalCorrect < 10){
+      openModalBtn.disabled = true;
+      openModalBtn.style.backgroundColor = "#a3872c";
+      openModalBtn.style.cursor = "not-allowed";
+      openModalBtn.textContent = "Are you even trying????";
+    }
+    else if (totalCorrect >=10 && totalCorrect < 13){
+      openModalBtn.disabled = true;
+      openModalBtn.style.backgroundColor = "#bf9300";
+      openModalBtn.style.cursor = "not-allowed";
+      openModalBtn.textContent = "I'm WAITING. PROBLEM???";
+    }
+    else if (totalCorrect >=13 && totalCorrect < 15){
+      openModalBtn.disabled = true;
+      openModalBtn.style.backgroundColor = "#b86f09";
+      openModalBtn.style.cursor = "not-allowed";
+      openModalBtn.textContent = "You think you're soooo smart";
+    } else if (totalCorrect >= 15 && totalCorrect < 17){
+      openModalBtn.disabled = true;
+      openModalBtn.style.backgroundColor = "#b84909";
+      openModalBtn.style.cursor = "not-allowed";
+      openModalBtn.textContent = "Wait a minute... 😲";
+    }
+    else if (totalCorrect >= 17 && totalCorrect < 18){
+      openModalBtn.disabled = true;
+      openModalBtn.style.backgroundColor = "#b84909";
+      openModalBtn.style.cursor = "not-allowed";
+      openModalBtn.textContent = "This isn't possible.... 🤯🤯🤯";
+    }
+    else if (totalCorrect >= 18 && totalCorrect < 19){
+      openModalBtn.disabled = true;
+      openModalBtn.style.backgroundColor = "#ff0000";
+      openModalBtn.style.cursor = "not-allowed";
+      openModalBtn.textContent = "JUUUUUUUUUUUST a bit more ";
+    }
+
+    // If all inputs are correct, enable the button
+    else if (totalCorrect == 19) {
+      openModalBtn.disabled = false;
+      openModalBtn.style.backgroundColor = "#4CAF50";  // Enabled color
+      openModalBtn.style.cursor = "pointer";
+      openModalBtn.textContent = "😇👼HOLY JEFF she did it👼😇";
+    } else {
+      openModalBtn.disabled = false;
+      openModalBtn.style.backgroundColor = "#02040a";
+      openModalBtn.style.cursor = "not-allowed";
+      openModalBtn.textContent = "MYSTERIOUS BUTTON";
+    }
+  }
+
+
+
+  </script>
+
+</body>
+</html>
