@@ -58,10 +58,9 @@ body {
     transition: border-color 0.3s ease;
   }
   .input-box.correct {
-    border-color: green;
-  }
+    border-color: rgb(0, 17, 255);  }
   .input-box.incorrect {
-    border-color: red;
+    border-color: rgb(0, 17, 255);
   }
 
   .passcode-section {
